@@ -49,20 +49,18 @@ nav ul li a:hover {
 }
 
 .content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
 }
 
 .card {
-    width: 200px;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
-    position: relative;
+    min-height: 150px;
 }
 
 .card h2 {
@@ -73,10 +71,12 @@ nav ul li a:hover {
 
 #dns {
     border-top: 4px solid red;
+    grid-column: span 1;
 }
 
 #html {
     border-top: 4px solid magenta;
+    grid-column: span 1;
 }
 
 #tcpip {

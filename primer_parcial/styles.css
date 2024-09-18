@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    background-image: url('imagenes/pexels-kovyrina-937980.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+header h1 {
+    font-size: 2rem;
+    text-shadow: 2px 2px 5px #000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #ccc;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.card {
+    width: 200px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+
+.card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px #000;
+}
+
+#dns {
+    border-top: 4px solid red;
+}
+
+#html {
+    border-top: 4px solid magenta;
+}
+
+#tcpip {
+    border-top: 4px solid orange;
+}
+
+#css {
+    border-top: 4px solid blue;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+footer p {
+    margin: 5px 0;
+}

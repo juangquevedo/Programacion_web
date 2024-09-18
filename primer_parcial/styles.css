@@ -29,9 +29,9 @@ header h1 {
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     padding: 10px 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 24, 245, 0.5);
 }
 
 nav ul li {
@@ -60,13 +60,16 @@ nav ul li a:hover {
     border-radius: 10px;
     text-align: left;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
+    position: relative;
     min-height: 150px;
 }
 
-.card h2 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 3px #000;
+.card img {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: auto;
 }
 
 #dns {

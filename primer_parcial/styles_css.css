@@ -48,39 +48,13 @@ nav ul li a:hover {
     color: #ccc;
 }
 
-/*.content {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 20px;
-}*/
-.content {
-    display: grid;
-    grid-template-areas: 
-      ". . HTML . ."
-      ". DNS . CSS ."
-      ". . TCPIP . .";
-    gap: 20px;
-    padding: 20px;
-    flex: 1;
-}
-
-.content .block {
-    width: 2em;
-    height: 200px;
-    padding: 20px;
-    position: relative; 
-    box-sizing: border-box;
-}
-  
-
 .card {
     padding: 20px;
     border-radius: 10px;
     text-align: left;
     box-shadow: 2px 2px 15px rgba(255, 255, 255, 0.7);
     position: relative;
-    min-height: 200px;
+    min-height: 200;
 }
 
 .card img {
@@ -91,28 +65,10 @@ nav ul li a:hover {
     height: auto;
 }
 
-#dns {
-    border-top: 4px solid rgb(255, 0, 0);
-    background-color: rgba(255, 0, 0, 0.1);
-    grid-area: DNS;
-}
-
-#html {
-    border-top: 4px solid rgb(255, 0, 255);
-    background-color: rgba(255, 0, 255, 0.1);
-    grid-area: HTML;
-}
-
-#tcpip {
-    border-top: 4px solid rgb(255, 165, 0);
-    background-color: rgba(255, 165, 0, 0.1);
-    grid-area: TCPIP;
-}
-
 #css {
     border-top: 4px solid rgb(0, 0, 255);
     background-color: rgba(0, 0, 255, 0.1);
-    grid-area: CSS;
+    height: 300;
 }
 
 footer {

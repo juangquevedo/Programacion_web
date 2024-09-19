@@ -23,7 +23,12 @@ header {
 
 header h1 {
     font-size: 2rem;
-    text-shadow: 2px 2px 5px #000;
+    text-shadow: 5px -5px 5px rgb(255, 255, 255);
+}
+
+header h2 {
+    font-size: 2rem;
+    color: rgb(252, 164, 0);
 }
 
 nav ul {
@@ -48,37 +53,18 @@ nav ul li a:hover {
     color: #ccc;
 }
 
-/*.content {
+.content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 20px;
-}*/
-.content {
-    display: grid;
-    grid-template-areas: 
-      ". . HTML . ."
-      ". DNS . CSS ."
-      ". . TCPIP . .";
-    gap: 20px;
-    padding: 20px;
-    flex: 1;
 }
-
-.content .block {
-    width: 2em;
-    height: 200px;
-    padding: 20px;
-    position: relative; 
-    box-sizing: border-box;
-}
-  
 
 .card {
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: left;
-    box-shadow: 2px 2px 15px rgba(255, 255, 255, 0.7);
+    box-shadow: 5px 5px 5px rgba(255, 255, 255);
     position: relative;
     min-height: 200px;
 }
@@ -94,25 +80,29 @@ nav ul li a:hover {
 #dns {
     border-top: 4px solid rgb(255, 0, 0);
     background-color: rgba(255, 0, 0, 0.1);
-    grid-area: DNS;
+    grid-column: 1;
+    grid-row: 2;
 }
 
 #html {
     border-top: 4px solid rgb(255, 0, 255);
     background-color: rgba(255, 0, 255, 0.1);
-    grid-area: HTML;
+    grid-column: 2;
+    grid-row: 1.5;
 }
 
 #tcpip {
     border-top: 4px solid rgb(255, 165, 0);
     background-color: rgba(255, 165, 0, 0.1);
-    grid-area: TCPIP;
+    grid-column: 3;
+    grid-row: 2;
 }
 
 #css {
     border-top: 4px solid rgb(0, 0, 255);
     background-color: rgba(0, 0, 255, 0.1);
-    grid-area: CSS;
+    grid-column: 2;
+    grid-row: 3;
 }
 
 footer {

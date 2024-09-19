@@ -54,7 +54,7 @@ nav ul li a:hover {
     text-align: left;
     box-shadow: 2px 2px 15px rgba(255, 255, 255, 0.7);
     position: relative;
-    min-height: 200;
+    min-height: 300;
 }
 
 .card img {
@@ -68,7 +68,6 @@ nav ul li a:hover {
 #html {
     border-top: 4px solid rgb(255, 0, 255);
     background-color: rgba(255, 0, 255, 0.1);
-    height: 300;
 }
 
 footer {

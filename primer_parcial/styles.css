@@ -40,7 +40,7 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 1%;
 }
 
 nav ul li a {
@@ -54,9 +54,10 @@ nav ul li a:hover {
 }
 
 .content {
+    margin: 0 1%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
 }
 
@@ -81,28 +82,42 @@ nav ul li a:hover {
     border-top: 4px solid rgb(255, 0, 0);
     background-color: rgba(255, 0, 0, 0.1);
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 2 / span 2;
 }
 
 #html {
     border-top: 4px solid rgb(255, 0, 255);
     background-color: rgba(255, 0, 255, 0.1);
     grid-column: 2;
-    grid-row: 1.5;
+    grid-row: 1 / span 2;
 }
 
 #tcpip {
     border-top: 4px solid rgb(255, 165, 0);
     background-color: rgba(255, 165, 0, 0.1);
     grid-column: 3;
-    grid-row: 2;
+    grid-row: 2 / span 2;
 }
 
 #css {
     border-top: 4px solid rgb(0, 0, 255);
     background-color: rgba(0, 0, 255, 0.1);
     grid-column: 2;
-    grid-row: 3;
+    grid-row: 3 / span 2;
+}
+
+#html_1 {
+    border-top: 4px solid rgb(255, 0, 255);
+    background-color: rgba(255, 0, 255, 0.1);
+    grid-column: 1 / span 4;
+    grid-row: 1;
+}
+
+#css_1 {
+    border-top: 4px solid rgb(0, 0, 255);
+    background-color: rgba(0, 0, 255, 0.1);
+    grid-column: 1 / span 4;
+    grid-row: 1;
 }
 
 footer {
@@ -112,5 +127,5 @@ footer {
 }
 
 footer p {
-    margin: 5px 0;
+    margin: 1% 0;
 }

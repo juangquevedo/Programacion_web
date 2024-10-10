@@ -28,21 +28,35 @@ document.getElementById('update-user').addEventListener('click', () => {
 
 // Evento de envío del formulario (para agregar o modificar usuarios)
 document.getElementById('users-form').addEventListener('submit', async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const mail = document.getElementById('mail').value;
-    const id = document.getElementById('user-id').value;
+  const id = document.getElementById('user-id').value;
+  const firstName = document.getElementById('first-name').value;
+  const lastName = document.getElementById('last-name').value;
+  const phone = document.getElementById('phone').value;
+  const jobTitle = document.getElementById('job-title').value;
+  const email = document.getElementById('email').value;
+  const photo = document.getElementById('photo').value;
 
-    try {
-        if (id) {
-            await usersService.updateUsers(id, { name, mail }); // Actualización del usuario
-            showMessage('Usuario modificado correctamente', messageContainer);
-        } else {
-            await usersService.addUsers({ name, mail }); // Creación de un nuevo usuario
-            showMessage('Usuario agregado correctamente', messageContainer);
-        }
-    } catch (error) {
-        showMessage(error.message, messageContainer);
-    }
+  const userData = {
+      firstName,
+      lastName,
+      phone,
+      jobTitle,
+      email,
+      photo
+  };
+
+  try {
+      if (id) {
+          await usersService.updateUsers(id, userData);
+          showMessage('Usuario modificado correctamente', messageContainer);
+      } else {
+          await usersService.addUsers(userData);
+          showMessage('Usuario agregado correctamente', messageContainer);
+      }
+  } catch (error) {
+      showMessage(error.message, messageContainer);
+  }
 });
+

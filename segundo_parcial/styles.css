@@ -1,3 +1,4 @@
+/* Estilo general del cuerpo */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,6 +6,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Estilo del encabezado */
 header {
     background-color: #0400ff;
     color: white;
@@ -12,15 +14,17 @@ header {
     text-align: center;
 }
 
+/* Estilo de las acciones principales */
 .actions {
     margin: 20px;
     display: flex;
     justify-content: space-around;
 }
 
+/* Estilo de los botones */
 button {
     background-color: #013bfa;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding: 15px 30px;
     border: none;
     border-radius: 5px;
@@ -32,12 +36,14 @@ button:hover {
     background-color: #278cff;
 }
 
+/* Estilo del contenedor principal */
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Estilo de la lista de usuarios */
 .user-list {
     width: 80%;
     margin-top: 20px;
@@ -55,33 +61,43 @@ main {
     background-color: #e2e2e2;
 }
 
+/* Estilo para esconder elementos */
 .hidden {
     display: none;
 }
 
+/* Estilo del formulario */
 form {
     width: 50%;
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
+/* Estilo de las etiquetas de los campos */
 label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
 }
 
+/* Estilo de los campos de entrada de texto */
 input[type="text"],
-input[type="number"] {
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="tel"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
 }
 
+/* Estilo para el contenedor de mensajes */
 #message-container {
     margin-top: 20px;
     color: red;

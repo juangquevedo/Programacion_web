@@ -15,7 +15,6 @@ export function renderUsers(users, container) {
   });
 }
 
-
 // Función para mostrar mensajes (éxito o error)
 export function showMessage(message, container) {
   container.textContent = message;

@@ -2,12 +2,16 @@ import UsersService from './api.js'; // Importas la clase
 import { renderUsers, showMessage, populateForm } from './dom.js';
 
 const apiBaseURL = 'https://bbd7-2800-e2-2780-2479-2417-fe6c-d24e-ecb3.ngrok-free.app';
-const usersService = new UsersService(apiBaseURL);  // Aquí creas una instancia, con un nombre diferente
+const usersService = new UsersService(apiBaseURL); 
+
+const messageContainer = document.getElementById('message-container');
+const usersContainer = document.getElementById('users-container');
+
 
 // Evento para consultar usuarios
 document.getElementById('get-users').addEventListener('click', async () => {
     try {
-        const users = await usersService.getUsers(); // Llamas al método usando la instancia
+        const users = await usersService.getUsers();
         renderUsers(users, usersContainer);
     } catch (error) {
         showMessage(error.message, messageContainer);

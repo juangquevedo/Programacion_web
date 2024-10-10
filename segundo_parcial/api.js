@@ -32,17 +32,17 @@ class UsersService {
     ];
   }
 
-  // Método para obtener los alimentos
+  // Método para obtener los usuarios
   async getUsers() {
     return this.users;
   }
 
-  // Método para crear un nuevo alimento en la estructura fija
+  // Método para crear un nuevo usuarios en la estructura fija
   async addUsers(user) {
-    // Genera un ID para el nuevo alimento
+    // Genera un ID para el nuevo usuarios
     const newId = this.users.length ? Math.max(...this.users.map(u => u.id)) + 1 : 1;
 
-    // Agrega el nuevo alimento al array de alimentos
+    // Agrega el nuevo usuarios al array de usuarios
     const newUser = { ...user, id: newId };
     this.users.push(newUser);
 

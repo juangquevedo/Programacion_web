@@ -1,5 +1,5 @@
 class UsersService {
-  constructor() {
+  constructor(apiBaseURL) {
     // Estructura fija de alimentos temporal mientras no se usa la API real
     this.users = [
       {
@@ -30,25 +30,62 @@ class UsersService {
         "email": "HAy5HuXk1D4@nquosy.com"
       }
     ];
+    this.apiBaseURL = apiBaseURL;
   }
 
-  // Método para obtener los usuarios
+  // Método para obtener los usuarios desde la API
   async getUsers() {
-    return this.users;
+    try {
+      const response = await fetch(`${this.apiBaseURL}/users`); // Cambia la URL según la estructura del API
+      const users = await response.json(); // Asegúrate de parsear la respuesta como JSON
+      return users; // Devuelve el arreglo de usuarios
+    } catch (error) {
+      console.error('Error obteniendo los usuarios:', error);
+      throw error;
+    }
   }
 
-  // Método para crear un nuevo usuarios en la estructura fija
+  // Método para crear un nuevo usuario en la API
   async addUsers(user) {
-    // Genera un ID para el nuevo usuarios
-    const newId = this.users.length ? Math.max(...this.users.map(u => u.id)) + 1 : 1;
-
-    // Agrega el nuevo usuarios al array de usuarios
-    const newUser = { ...user, id: newId };
-    this.users.push(newUser);
-
-    console.log('New user added:', newUser);
-    return { success: true, user: newUser };
+    try {
+      const response = await fetch(`${this.apiBaseURL}/users`, {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+      });
+      if (!response.ok) {
+        throw new Error('Error al agregar el usuario');
+      }
+      const newUser = await response.json();
+      return newUser;
+    } catch (error) {
+      console.error('Error en addUsers:', error);
+      throw error;
+    }
   }
-}
+
+  // Método para actualizar un usuario existente
+  async updateUsers(id, user) {
+    try {
+      const response = await fetch(`${this.apiBaseURL}/users/${id}`, {
+      method: 'PUT',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+      });
+      if (!response.ok) {
+        throw new Error('Error al modificar el usuario');
+      }
+      const updatedUser = await response.json();
+      return updatedUser;
+    } catch (error) {
+      console.error('Error en updateUsers:', error);
+      throw error;
+    }
+  }
+  }
 
 export default UsersService;

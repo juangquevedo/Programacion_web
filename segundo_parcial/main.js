@@ -1,21 +1,27 @@
 import UsersService from './api.js'; // Importas la clase
 import { renderUsers, showMessage, populateForm } from './dom.js';
 
-const apiBaseURL = 'https://bbd7-2800-e2-2780-2479-2417-fe6c-d24e-ecb3.ngrok-free.app';
+const apiBaseURL = 'http://ec2-3-138-183-128.us-east-2.compute.amazonaws.com:4010';
 const usersService = new UsersService(apiBaseURL); 
 
 const messageContainer = document.getElementById('message-container');
 const usersContainer = document.getElementById('users-container');
 
 
-// Evento para consultar usuarios
 document.getElementById('get-users').addEventListener('click', async () => {
-    try {
-        const users = await usersService.getUsers();
-        renderUsers(users, usersContainer);
-    } catch (error) {
-        showMessage(error.message, messageContainer);
+  try {
+    const users = await usersService.getUsers(); // Obtén los usuarios desde la API
+    console.log('Usuarios obtenidos:', users);  // Verifica que obtienes el arreglo correcto
+    
+    if (Array.isArray(users)) {  // Verifica que users sea un arreglo antes de usar forEach
+      renderUsers(users, usersContainer);
+    } else {
+      console.error('La respuesta no es un arreglo de usuarios');
+      showMessage('Error: La respuesta no contiene usuarios válidos', messageContainer);
     }
+  } catch (error) {
+    showMessage(error.message, messageContainer);
+  }
 });
 
 // Evento para mostrar el formulario de agregar usuarios

@@ -14,47 +14,47 @@
     </header>
 
     <main>
-        <!-- Contenedor para los usuarios-->
-        <section id="users-container" class="users-list"></section>
+      <!-- Contenedor para mensajes de error o éxito -->
+      <section id="message-container"></section>
+      <!-- Formulario para agregar o modificar usuarios -->
+      <section>
+        <h2 id="form-title">Formulario de usuarios</h2>
+        <form id="users-form">
+            <!-- Campo oculto para el ID del usuario, solo para modificar -->
+            <input type="hidden" id="user-id">
+    
+            <label for="first-name">Nombre:</label>
+            <input type="text" id="first-name" placeholder="Nombre del usuario" required>
+    
+            <label for="last-name">Apellido:</label>
+            <input type="text" id="last-name" placeholder="Apellido del usuario" required>
+    
+            <label for="phone">Teléfono:</label>
+            <input type="text" id="phone" placeholder="Teléfono del usuario" required>
+    
+            <label for="job-title">Título del trabajo:</label>
+            <input type="text" id="job-title" placeholder="Título del trabajo" required>
+    
+            <label for="email">Correo:</label>
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+    
+            <label for="photo">URL de la foto:</label>
+            <input type="url" id="photo" placeholder="URL de la foto del usuario" required>
+    
+            <button type="submit" id="submit-button">Guardar</button>
+        </form>
+      </section>
 
-        <!-- Formulario para agregar o modificar usuarios -->
-        <section>
-          <h2 id="form-title">Formulario de usuarios</h2>
-          <form id="users-form">
-              <!-- Campo oculto para el ID del usuario, solo para modificar -->
-              <input type="hidden" id="user-id">
-      
-              <label for="first-name">Nombre:</label>
-              <input type="text" id="first-name" placeholder="Nombre del usuario" required>
-      
-              <label for="last-name">Apellido:</label>
-              <input type="text" id="last-name" placeholder="Apellido del usuario" required>
-      
-              <label for="phone">Teléfono:</label>
-              <input type="text" id="phone" placeholder="Teléfono del usuario" required>
-      
-              <label for="job-title">Título del trabajo:</label>
-              <input type="text" id="job-title" placeholder="Título del trabajo" required>
-      
-              <label for="email">Correo:</label>
-              <input type="email" id="email" placeholder="Correo electrónico" required>
-      
-              <label for="photo">URL de la foto:</label>
-              <input type="url" id="photo" placeholder="URL de la foto del usuario" required>
-      
-              <button type="submit" id="submit-button">Guardar</button>
-          </form>
-        </section>
+      <!-- Botones para acciones principales -->
+      <div class="actions">
+          <button id="get-users">Consultar Usuarios</button>
+          <button id="add-user">Agregar Usuario</button>
+          <button id="update-user">Modificar Usuario</button>
+      </div>
 
-        <!-- Botones para acciones principales -->
-        <div class="actions">
-            <button id="get-users">Consultar Usuarios</button>
-            <button id="add-user">Agregar Usuario</button>
-            <button id="update-user">Modificar Usuario</button>
-        </div>
+      <!-- Contenedor para los usuarios-->
+      <section id="users-container" class="users-list"></section>
 
-        <!-- Contenedor para mensajes de error o éxito -->
-        <section id="message-container"></section>
     </main>
 
     <script type="module" src="main.js"></script>

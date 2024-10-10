@@ -11,7 +11,6 @@ const usersContainer = document.getElementById('users-container');
 document.getElementById('get-users').addEventListener('click', async () => {
   try {
     const users = await usersService.getUsers(); // Obtén los usuarios desde la API
-    console.log('Usuarios obtenidos:', users);  // Verifica que obtienes el arreglo correcto
     
     if (Array.isArray(users)) {  // Verifica que users sea un arreglo antes de usar forEach
       renderUsers(users, usersContainer);

@@ -1,5 +1,5 @@
 Descripción del Proyecto
-Esta pagina web permitira a los usuarios registrarse para crear, gestionar y participar en eventos de manera sencilla. La plataforma ofrece una interfaz intuitiva donde los usuarios pueden organizar eventos, ver detalles, confirmar su asistencia y explorar la ubicación del evento mediante la integración de un api de un servicio de mapas. La aplicación está diseñada para facilitar la organización de eventos tanto personales como públicos.
+Esta pagina web permitira a los usuarios registrarse para crear, gestionar y participar en eventos personales (como bodas, fiestas de cumpleaños, eventos familiares, etc) de manera sencilla. La plataforma ofrece una interfaz intuitiva donde los usuarios pueden organizar eventos, ver detalles, confirmar su asistencia y explorar la ubicación del evento mediante la integración de un api de un servicio de mapas. La aplicación está diseñada para facilitar la organización de eventos tanto personales como públicos.
 
 Características Principales
 Gestión de Eventos:

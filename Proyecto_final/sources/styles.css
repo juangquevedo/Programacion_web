@@ -7,7 +7,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #000;
+    background-color: #1a2641;
     color: #fff;
     margin: 0;
     padding-top: 80px; /* espacio para la navbar fija */
@@ -20,12 +20,12 @@ body {
     align-items: center;
     padding: 20px 50px;
     width: 100%;
-    background-color: #000;
+    background-color: #0EB1D0;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    border-bottom: 1px solid #333; /* Línea para dividir */
+    border-bottom: 1px solid #000000; /* Línea para dividir */
 }
 
 .logo {
@@ -46,21 +46,22 @@ body {
 }
 
 .nav-links a:hover {
-    color: #aaff00;
+    color: #F99E45;
 }
 
 .auth-buttons .btn {
     text-decoration: none;
-    color: #fff;
+    color: #ffffff;
     padding: 10px 20px;
-    border: 2px solid #aaff00;
+    border: 2px solid #F99E45;
+    background-color: #F99E45;
     border-radius: 20px;
     margin-left: 10px;
 }
 
 .register {
-    background-color: #aaff00;
-    color: #000;
+    background-color: #F99E45;
+    color: #ffffff;
 }
 
 /* Hero Section */
@@ -91,7 +92,7 @@ body {
 .hero-content .discover {
     text-decoration: none;
     color: #000;
-    background-color: #aaff00;
+    background-color: #F99E45;
     padding: 15px 30px;
     border-radius: 20px;
     font-weight: bold;
@@ -172,7 +173,8 @@ body {
     margin-top: 30px;
     font-size: 1em;
     padding: 15px 30px;
-    background-color: #aaff00;
+    background-color: #ffffff;
+    border: 2px solid #F99E45;
     color: #000;
     border: none;
     border-radius: 20px;

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizar Evento</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">MEETUPHUB</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="organizar_evento.html">Organizar Evento</a></li>
+                <li><a href="#">Mis Eventos</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="#" class="btn">Iniciar Sesión</a>
+                <a href="#" class="btn register">Registro</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección de organización de eventos -->
+    <main class="organize-section">
+        <h1>ORGANIZAR EVENTO</h1>
+        <p>Escribe la información de tu evento e invita a tus amigos</p>
+        <div class="form-container">
+            <form class="event-form">
+                <input type="text" placeholder="Escribe nombre del evento" required>
+                <input type="text" placeholder="Escribe el nombre del encargado" required>
+                <input type="text" placeholder="Escribe un contacto" required>
+                <textarea placeholder="Escribe la descripción" required></textarea>
+            </form>
+            <div class="map-container">
+                <h2>Ingresa la ubicación</h2>
+                <div id="map"></div>
+            </div>
+        </div>
+        <button class="btn register">Registrar</button>
+    </main>
+    <script src="script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initMap" async defer></script>
+</body>
+</html>

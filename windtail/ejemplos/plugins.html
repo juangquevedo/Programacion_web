@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo con Plugins de Tailwind</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+
+  <!-- Contenedor principal -->
+  <div class="max-w-3xl mx-auto space-y-8">
+
+    <!-- Sección de Artículo (Estilizado con Tailwind Typography) -->
+    <article class="prose lg:prose-xl">
+      <h1>Título del artículo con Tailwind Typography</h1>
+      <p>Tailwind Typography permite estilizar contenido textual de manera elegante, mejorando la legibilidad sin tener que escribir CSS adicional.</p>
+      <p>En este artículo, exploramos cómo aplicar estilos a los textos, encabezados, listas y demás elementos de texto en una página web usando clases de utilidades.</p>
+      <h2>Subtítulo</h2>
+      <p>A continuación, veremos cómo agregar formularios con un diseño consistente y atractivo.</p>
+      <ul>
+        <li>Punto importante 1</li>
+        <li>Punto importante 2</li>
+        <li>Punto importante 3</li>
+      </ul>
+    </article>
+
+    <!-- Formulario de Contacto (Estilizado con Tailwind Forms) -->
+    <form class="bg-white shadow-md rounded-lg p-8 space-y-4">
+      <h2 class="text-2xl font-semibold text-gray-700">Formulario de contacto</h2>
+
+      <!-- Campo de nombre -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+        <input type="text" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Tu nombre">
+      </div>
+
+      <!-- Campo de correo -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+        <input type="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="tucorreo@ejemplo.com">
+      </div>
+
+      <!-- Campo de mensaje -->
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label>
+        <textarea id="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Tu mensaje"></textarea>
+      </div>
+
+      <!-- Botón de envío -->
+      <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+        Enviar
+      </button>
+    </form>
+
+  </div>
+
+</body>
+</html>

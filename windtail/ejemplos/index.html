@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo de Tailwind CSS</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Contenedor principal -->
+  <div class="max-w-4xl mx-auto p-6">
+
+    <!-- Título -->
+    <h1 class="text-3xl font-bold text-center text-blue-500 mb-8">Ejemplo de Componentes con Tailwind CSS</h1>
+
+    <!-- Tarjeta de ejemplo -->
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-2">Card de Información</h2>
+      <p class="text-gray-600 leading-relaxed">Esta es una tarjeta de ejemplo que utiliza clases de utilidad en Tailwind CSS para definir el espaciado, el color de fondo, las sombras, y el estilo de texto.</p>
+    </div>
+
+    <!-- Botón -->
+    <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+      Enviar
+    </button>
+
+    <!-- Grid responsivo -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      <div class="bg-green-500 text-white p-4 rounded">Elemento 1</div>
+      <div class="bg-yellow-500 text-white p-4 rounded">Elemento 2</div>
+      <div class="bg-red-500 text-white p-4 rounded">Elemento 3</div>
+      <div class="bg-purple-500 text-white p-4 rounded">Elemento 4</div>
+      <div class="bg-teal-500 text-white p-4 rounded">Elemento 5</div>
+      <div class="bg-pink-500 text-white p-4 rounded">Elemento 6</div>
+    </div>
+
+    <!-- Imagen con estilo de borde redondeado -->
+    <div class="mt-6 text-center">
+      <img class="w-64 h-64 mx-auto rounded-full shadow-lg" src="https://www.idea.gov.co/wp-content/uploads/2024/10/udea.jpg" alt="Imagen de ejemplo">
+      <p class="mt-4 text-gray-700">Ejemplo de imagen con borde redondeado</p>
+    </div>
+
+  </div>
+
+  <div class="text-left lg:text-center">
+    Texto alineado a la izquierda en dispositivos pequeños, pero centrado en pantallas grandes.
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-blue-500 p-4">Elemento 1</div>
+    <div class="bg-green-500 p-4">Elemento 2</div>
+    <div class="bg-red-500 p-4">Elemento 3</div>
+    <div class="bg-yellow-500 p-4">Elemento 4</div>
+  </div>
+  
+  <h1 class="text-lg md:text-2xl lg:text-4xl">
+    Texto con tamaño ajustado según el tamaño de pantalla
+  </h1>
+
+  <div class="w-full md:w-1/2 lg:w-1/3 p-4">
+    Contenido que se adapta al ancho de la pantalla
+  </div>
+
+  <nav class="hidden sm:block">
+    Menú de navegación visible solo en pantallas de tablet o mayores.
+  </nav>  
+  
+</body>
+</html>

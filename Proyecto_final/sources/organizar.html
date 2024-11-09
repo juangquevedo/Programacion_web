@@ -4,45 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizar Evento</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="output.css">
 </head>
-<body>
+<body class="bg-[#1a2641] text-white pt-20">
     <!-- Menú de navegación -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">MEETUPHUB</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="organizar_evento.html">Organizar Evento</a></li>
-                <li><a href="#">Mis Eventos</a></li>
+    <header class="fixed top-0 left-0 w-full z-50 border-b border-black bg-[#0EB1D0]">
+        <nav class="flex justify-between items-center px-12 py-5">
+            <div class="text-2xl font-bold">MEETUPHUB</div>
+            <ul class="flex gap-5">
+                <li><a href="index.html" class="text-white hover:text-[#F99E45]">Inicio</a></li>
+                <li><a href="organizar.html" class="text-white hover:text-[#F99E45]">Organizar Evento</a></li>
+                <li><a href="#" class="text-white hover:text-[#F99E45]">Mis Eventos</a></li>
             </ul>
-            <div class="auth-buttons">
-                <a href="#" class="btn">Iniciar Sesión</a>
-                <a href="#" class="btn register">Registro</a>
+            <div class="flex gap-3">
+                <a href="#" class="px-5 py-2 bg-[#F99E45] text-white rounded-full">Iniciar Sesión</a>
+                <a href="#" class="px-5 py-2 bg-[#F99E45] text-white rounded-full">Registro</a>
             </div>
         </nav>
     </header>
 
     <!-- Sección de organización de eventos -->
-    <main class="organize-section">
-        <h1>ORGANIZAR EVENTO</h1>
-        <p>Escribe la información de tu evento e invita a tus amigos</p>
-        <div class="form-container">
-            <form class="event-form">
-                <input type="text" placeholder="Escribe nombre del evento" required>
-                <input type="text" placeholder="Escribe el nombre del encargado" required>
-                <input type="text" placeholder="Escribe un contacto" required>
-                <textarea placeholder="Escribe la descripción" required></textarea>
+    <main class="text-center py-12 px-6 md:px-20 lg:px-32">
+        <h1 class="text-4xl mb-2">ORGANIZAR EVENTO</h1>
+        <p class="text-xl mb-10">Escribe la información de tu evento e invita a tus amigos</p>
+        <div class="form-container flex flex-col md:flex-row justify-center items-start gap-10">
+            <form class="event-form w-full max-w-md space-y-5">
+                <input type="text" placeholder="Escribe nombre del evento" class="w-full p-4 text-black rounded-lg" required>
+                <input type="text" placeholder="Escribe el nombre del encargado" class="w-full p-4 text-black rounded-lg" required>
+                <input type="text" placeholder="Escribe un contacto" class="w-full p-4 text-black rounded-lg" required>
+                <textarea placeholder="Escribe la descripción" class="w-full p-4 text-black rounded-lg h-28 resize-none" required></textarea>
             </form>
-            <div class="map-container">
-                <h2>Ingresa la ubicación</h2>
-                <input id="location-input" type="text" placeholder="Escribe una ubicación">
-                <div id="map"></div>
+            <div class="map-container max-w-md">
+                <h2 class="text-2xl mb-4">Ingresa la ubicación</h2>
+                <input id="location-input" type="text" placeholder="Escribe una ubicación" class="w-full p-4 text-black rounded-lg">
+                <div id="map" class="w-96 h-72 rounded-lg mt-4"></div>  
             </div>
         </div>
-        <button class="btn register">Registrar</button>
+        <button class="mt-10 px-6 py-3 bg-white text-black rounded-full font-bold border border-[#F99E45]">Registrar</button>
     </main>
     <script src="script.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbIi1nr5zsmcCBkm1vHQ259HWy-kwkoM&callback=initMap" async defer></script>
 </body>
 </html>

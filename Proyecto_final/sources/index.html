@@ -4,36 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Juan Guillermo Quevedo Cifuentes"/>
-    <meta name="description" content="Proyecto final Desarrollo de Aplicaciones web"
+    <meta name="description" content="Proyecto final Desarrollo de Aplicaciones web">
     <title>MeetupHub</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="output.css">
 </head>
-<body>
+<body class="bg-[#1a2641] text-white pt-20">
     <!-- Menú de navegación -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">MEETUPHUB</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="organizar.html">Organizar Evento</a></li>
-                <li><a href="#">Mis Eventos</a></li>
+    <header class="fixed top-0 left-0 w-full z-50 border-b border-black bg-[#0EB1D0]">
+        <nav class="flex justify-between items-center px-12 py-5">
+            <div class="text-2xl font-bold">MEETUPHUB</div>
+            <ul class="flex gap-5">
+                <li><a href="index.html" class="text-white hover:text-[#F99E45]">Inicio</a></li>
+                <li><a href="organizar.html" class="text-white hover:text-[#F99E45]">Organizar Evento</a></li>
+                <li><a href="#" class="text-white hover:text-[#F99E45]">Mis Eventos</a></li>
             </ul>
-            <div class="auth-buttons">
-                <a href="#" class="btn">Iniciar Sesión</a>
-                <a href="#" class="btn register">Registro</a>
+            <div class="flex gap-3">
+                <a href="#" class="btn px-5 py-2 bg-[#F99E45] text-white rounded-full">Iniciar Sesión</a>
+                <a href="#" class="btn px-5 py-2 bg-[#F99E45] text-white rounded-full">Registro</a>
             </div>
         </nav>
     </header>
 
     <!-- Sección principal -->
-    <main class="hero-section">
-        <div class="hero-content">
-            <h1>ORGANIZA TU EVENTO</h1>
-            <p>Esta página web permitirá a los usuarios registrarse para crear, gestionar y participar en eventos de manera sencilla.</p>
-            <a href="#" class="btn discover">Descúbrelo</a>
+    <main class="flex flex-col md:flex-row justify-center items-center px-6 py-12 md:px-20 lg:px-32">
+        <div class="hero-content max-w-xl mr-0 md:mr-6 mb-6 md:mb-0 text-center md:text-left">
+            <h1 class="text-5xl mb-4">ORGANIZA TU EVENTO</h1>
+            <p class="text-xl mb-6">Esta página web permitirá a los usuarios registrarse para crear, gestionar y participar en eventos de manera sencilla.</p>
+            <a href="#" class="px-6 py-3 bg-[#F99E45] text-black rounded-full font-bold">Descúbrelo</a>
         </div>
         <div class="hero-image">
-            <img src="img/logo_meetuphub.png" alt="Logo de MeetupHub">
+            <img src="img/logo_meetuphub.png" alt="Logo de MeetupHub" class="w-52 h-auto rounded-lg">
         </div>
     </main>
 </body>

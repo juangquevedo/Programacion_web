@@ -1,8 +1,8 @@
-import bcrypt from 'bcrypt'; // Para manejar contraseñas
-import jwt from 'jsonwebtoken'; // Para generar tokens JWT
-import db from '../db/index.js'; // Tu conexión a la base de datos
+import bcrypt from 'bcrypt'; 
+import jwt from 'jsonwebtoken'; 
+import db from '../migrations/index.js';
 
-const secretKey = process.env.JWT_SECRET; // Llave secreta para JWT desde las variables de entorno
+const secretKey = process.env.JWT_SECRET; 
 
 class PatientService {
     static async login(email, password) {

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
-import { getPatientByEmail, getPatientAppointments, createNewAppointment } from '../services/patient.js';
+import { getPatientByEmail, getPatientAppointments, createAppointment} from '../services/patient.js';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;

@@ -1,111 +1,130 @@
-import bcrypt from 'bcrypt'; 
-import jwt from 'jsonwebtoken'; 
-import db from '../migrations/index.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import pool from '../migrations/index.js';
 
-const secretKey = process.env.JWT_SECRET; 
+export const getPatientByEmail = async (email) => {
+  const query = 'SELECT id, email, password FROM patients WHERE email = $1';
+  const result = await pool.query(query, [email]);
+  return result.rows[0];
+};
 
-class PatientService {
-    static async login(email, password) {
-    const query = 'SELECT id, email, password FROM patients WHERE email = $1';
-    const values = [email];
-    const result = await db.query(query, values);
+export const getPatientAppointments = async (patientId, date = null) => {
+  let query = `
+    SELECT a.id, a.doctor_id, a.date, a.time,
+           d.name as doctor_name, s.name as specialty
+    FROM appointments a
+    JOIN doctors d ON a.doctor_id = d.id
+    JOIN specialties s ON d.specialty_id = s.id
+    WHERE a.patient_id = $1
+  `;
+  const values = [patientId];
 
-    if (result.rows.length === 0) {
-      throw new Error('Usuario no encontrado');
-    }
-
-    const patient = result.rows[0];
-    const passwordMatch = await bcrypt.compare(password, patient.password);
-    if (!passwordMatch) {
-      throw new Error('Contraseña incorrecta');
-    }
-
-    // Generar token JWT
-    const token = jwt.sign({ id: patient.id }, secretKey, { expiresIn: '30m' });
-
-    return { token, patient: { id: patient.id, email: patient.email } };
+  if (date) {
+    query += ' AND a.date = $2';
+    values.push(date);
   }
 
-  static async listAppointments(patientId, date = null) {
-    let query = `
-      SELECT id, doctor_id, date, time 
-      FROM appointments 
-      WHERE patient_id = $1
-    `;
-    const values = [patientId];
+  query += ' ORDER BY a.date, a.time';
+  const result = await pool.query(query, values);
+  return result.rows;
+};
 
-    if (date) {
-      query += ' AND date = $2';
-      values.push(date);
-    }
+export const createAppointment = async (patientId, doctorId, date, time) => {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
 
-    const result = await db.query(query, values);
-    return result.rows;
-  }
+    // Verificar disponibilidad del médico
+    const doctorCheck = await client.query(
+      'SELECT id FROM appointments WHERE doctor_id = $1 AND date = $2 AND time = $3',
+      [doctorId, date, time]
+    );
 
-  static async createAppointment(patientId, doctorId, date, time) {
-    // Verifica disponibilidad del médico
-    const doctorQuery = `
-      SELECT id FROM appointments 
-      WHERE doctor_id = $1 AND date = $2 AND time = $3
-    `;
-    const doctorValues = [doctorId, date, time];
-    const doctorResult = await db.query(doctorQuery, doctorValues);
-
-    if (doctorResult.rows.length > 0) {
+    if (doctorCheck.rows.length > 0) {
       throw new Error('El médico no está disponible en esa fecha y hora');
     }
 
-    // Verifica disponibilidad del paciente
-    const patientQuery = `
-      SELECT id FROM appointments 
-      WHERE patient_id = $1 AND date = $2 AND time = $3
-    `;
-    const patientValues = [patientId, date, time];
-    const patientResult = await db.query(patientQuery, patientValues);
+    // Verificar disponibilidad del paciente
+    const patientCheck = await client.query(
+      'SELECT id FROM appointments WHERE patient_id = $1 AND date = $2 AND time = $3',
+      [patientId, date, time]
+    );
 
-    if (patientResult.rows.length > 0) {
-      throw new Error('El paciente ya tiene una cita en esa fecha y hora');
+    if (patientCheck.rows.length > 0) {
+      throw new Error('Ya tienes una cita programada para esa fecha y hora');
     }
 
-    // Crea la cita
-    const insertQuery = `
-      INSERT INTO appointments (patient_id, doctor_id, date, time) 
-      VALUES ($1, $2, $3, $4) 
-      RETURNING *
-    `;
-    const insertValues = [patientId, doctorId, date, time];
-    const result = await db.query(insertQuery, insertValues);
+    // Crear la cita
+    const result = await client.query(
+      'INSERT INTO appointments (patient_id, doctor_id, date, time) VALUES ($1, $2, $3, $4) RETURNING *',
+      [patientId, doctorId, date, time]
+    );
 
+    await client.query('COMMIT');
     return result.rows[0];
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  } finally {
+    client.release();
   }
+};
 
-  static async updateAppointment(appointmentId, doctorId, date, time) {
-    // Valida la disponibilidad como en `createAppointment`
+export const updateAppointment = async (appointmentId, patientId, doctorId, date, time) => {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
 
-    const query = `
-      UPDATE appointments 
-      SET doctor_id = $1, date = $2, time = $3 
-      WHERE id = $4 
-      RETURNING *
-    `;
-    const values = [doctorId, date, time, appointmentId];
-    const result = await db.query(query, values);
+    // Verificar que la cita existe y pertenece al paciente
+    const appointmentCheck = await client.query(
+      'SELECT id FROM appointments WHERE id = $1 AND patient_id = $2',
+      [appointmentId, patientId]
+    );
 
-    if (result.rows.length === 0) {
-      throw new Error('La cita no existe');
+    if (appointmentCheck.rows.length === 0) {
+      throw new Error('Cita no encontrada o no autorizada');
     }
 
+    // Verificar disponibilidad del médico
+    const doctorCheck = await client.query(
+      'SELECT id FROM appointments WHERE doctor_id = $1 AND date = $2 AND time = $3 AND id != $4',
+      [doctorId, date, time, appointmentId]
+    );
+
+    if (doctorCheck.rows.length > 0) {
+      throw new Error('El médico no está disponible en esa fecha y hora');
+    }
+
+    // Verificar disponibilidad del paciente
+    const patientCheck = await client.query(
+      'SELECT id FROM appointments WHERE patient_id = $1 AND date = $2 AND time = $3 AND id != $4',
+      [patientId, date, time, appointmentId]
+    );
+
+    if (patientCheck.rows.length > 0) {
+      throw new Error('Ya tienes una cita programada para esa fecha y hora');
+    }
+
+    // Actualizar la cita
+    const result = await client.query(
+      'UPDATE appointments SET doctor_id = $1, date = $2, time = $3 WHERE id = $4 AND patient_id = $5 RETURNING *',
+      [doctorId, date, time, appointmentId, patientId]
+    );
+
+    await client.query('COMMIT');
     return result.rows[0];
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  } finally {
+    client.release();
   }
+};
 
-  static async deleteAppointment(appointmentId) {
-    const query = 'DELETE FROM appointments WHERE id = $1';
-    const values = [appointmentId];
-    const result = await db.query(query, values);
-
-    return result.rowCount > 0;
-  }
-}
-
-export default PatientService;
+export const deleteAppointment = async (appointmentId, patientId) => {
+  const result = await pool.query(
+    'DELETE FROM appointments WHERE id = $1 AND patient_id = $2 RETURNING id',
+    [appointmentId, patientId]
+  );
+  return result.rows.length > 0;
+};

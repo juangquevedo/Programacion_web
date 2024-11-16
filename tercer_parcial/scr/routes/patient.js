@@ -1,12 +1,32 @@
 import express from 'express';
-import { login, getAppointments, createAppointment, updateAppointment, deleteAppointment } from '../controllers/patient.js';
+import { body } from 'express-validator';
+import { authenticateToken } from '../middleware/auth.js';
+import {
+  login,
+  getAppointments,
+  createNewAppointment,
+  updateExistingAppointment,
+  deleteExistingAppointment
+} from '../controllers/patient.js';
 
 const router = express.Router();
 
-router.post('/login', login);
-router.get('/appointment', getAppointments);
-router.post('/appointment', createAppointment);
-router.put('/appointment/:appointmentId', updateAppointment);
-router.delete('/appointment/:appointmentId', deleteAppointment);
+// Validaciones
+const appointmentValidations = [
+  body('doctorId').isInt().withMessage('Doctor ID debe ser un número entero'),
+  body('date').isDate().withMessage('Formato de fecha inválido'),
+  body('time').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).withMessage('Formato de hora inválido')
+];
+
+// Rutas
+router.post('/login', [
+  body('email').isEmail().withMessage('Email inválido'),
+  body('password').notEmpty().withMessage('La contraseña es requerida')
+], login);
+
+router.get('/appointment', authenticateToken, getAppointments);
+router.post('/appointment', authenticateToken, appointmentValidations, createNewAppointment);
+router.put('/appointment/:appointmentId', authenticateToken, appointmentValidations, updateExistingAppointment);
+router.delete('/appointment/:appointmentId', authenticateToken, deleteExistingAppointment);
 
 export default router;

@@ -1,10 +1,10 @@
 FROM node:18
 
-WORKDIR /src
+WORKDIR /scr
 
-COPY package*.json ./
+COPY * ./
 
-RUN npm install
+RUN npm install express dotenv jsonwebtoken express-validator pg bcrypt
 
 COPY . .
 

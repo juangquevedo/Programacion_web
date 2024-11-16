@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import patientRoutes from './routes/patient.js';
+import patientRoutes from './routes/patient.mjs';
 
 dotenv.config();
 

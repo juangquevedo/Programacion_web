@@ -1,12 +1,9 @@
-import { 
-    getDoctorData, 
-    getDoctorAppointmentsList 
-} from '../services/doctor.mjs';
+import { DoctorService } from '../services/doctor.mjs';
 
 export const getDoctorById = async (req, res) => {
     try {
         const { doctorId } = req.params;
-        const doctor = await getDoctorData(doctorId);
+        const doctor = await DoctorService.getDoctorData(doctorId);
         
         if (!doctor) {
             return res.status(404).json({ message: 'Médico no encontrado' });
@@ -23,7 +20,7 @@ export const getDoctorAppointments = async (req, res) => {
         const { doctorId } = req.params;
         const { date, status } = req.query; // Permitimos filtrar por fecha y estado
         
-        const appointments = await getDoctorAppointmentsList(doctorId, date, status);
+        const appointments = await DoctorService.getDoctorAppointmentsList(doctorId, date, status);
         res.json(appointments);
     } catch (error) {
         res.status(500).json({ message: error.message });

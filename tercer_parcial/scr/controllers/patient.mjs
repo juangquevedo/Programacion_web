@@ -1,11 +1,5 @@
 import { validationResult } from 'express-validator';
-import {
-  getPatientByEmail,
-  getPatientAppointments,
-  createAppointment,
-  updateAppointment,
-  deleteAppointment
-} from '../services/patient.mjs';
+import { PatientService } from '../services/patient.mjs';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -17,7 +11,7 @@ export const login = async (req, res) => {
     }
 
     const { email, password } = req.body;
-    const patient = await getPatientByEmail(email);
+    const patient = await PatientService.getPatientByEmail(email);
 
     if (!patient) {
       return res.status(401).json({ message: 'Credenciales inválidas' });
@@ -43,7 +37,7 @@ export const login = async (req, res) => {
 export const getAppointments = async (req, res) => {
   try {
     const { date } = req.query;
-    const appointments = await getPatientAppointments(req.user.id, date);
+    const appointments = await PatientService.getPatientAppointments(req.user.id, date);
     res.json(appointments);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -58,7 +52,7 @@ export const createNewAppointment = async (req, res) => {
     }
 
     const { doctorId, date, time } = req.body;
-    const appointment = await createAppointment(req.user.id, doctorId, date, time);
+    const appointment = await PatientService.createAppointment(req.user.id, doctorId, date, time);
     res.status(201).json(appointment);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -74,7 +68,7 @@ export const updateExistingAppointment = async (req, res) => {
 
     const { appointmentId } = req.params;
     const { doctorId, date, time } = req.body;
-    const appointment = await updateAppointment(appointmentId, req.user.id, doctorId, date, time);
+    const appointment = await PatientService.updateAppointment(appointmentId, req.user.id, doctorId, date, time);
     res.json(appointment);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -84,7 +78,7 @@ export const updateExistingAppointment = async (req, res) => {
 export const deleteExistingAppointment = async (req, res) => {
   try {
     const { appointmentId } = req.params;
-    const result = await deleteAppointment(appointmentId, req.user.id);
+    const result = await PatientService.deleteAppointment(appointmentId, req.user.id);
     if (result) {
       res.status(204).send();
     } else {

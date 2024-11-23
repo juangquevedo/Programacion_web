@@ -1,6 +1,7 @@
 // Importaciones necesarias
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors'
 import routes from './routes.mjs'; // Importamos las rutas
 import pool from './database.mjs'; // Asegúrate de tener este módulo para la conexión a la base de datos
 
@@ -10,9 +11,13 @@ dotenv.config();
 // Configuración del servidor
 const app = express();
 const PORT = process.env.PORT || 3000;
+//const cors = require('cors');
 
 // Middleware para manejar JSON
 app.use(express.json());
+
+// Habilitar CORS para todas las solicitudes
+app.use(cors());
 
 // Verificación de conexión a la base de datos
 (async () => {

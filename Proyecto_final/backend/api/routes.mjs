@@ -1,14 +1,24 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import authenticateToken from './middleware/auth.mjs';
 import pool from './database.mjs';
 
 const router = Router();
 
-// Obtener todos los eventos
-router.get('/eventos', async (req, res) => {
+// Obtener eventos del usuario autenticado
+router.get('/eventos', authenticateToken, async (req, res) => {
+  const userId = req.user.id; // Obtenemos el ID del usuario desde el token
   try {
-    const [rows] = await pool.query('SELECT * FROM Eventos');
+    const [rows] = await pool.query(
+      `
+      SELECT e.evento_id, e.titulo, e.descripcion, e.fecha, e.hora, e.ubicacion
+      FROM Participantes p
+      INNER JOIN Eventos e ON p.evento_id = e.evento_id
+      WHERE p.usuario_id = ?
+      `,
+      [userId]
+    );
     res.json(rows);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los eventos' });
@@ -19,6 +29,26 @@ router.get('/eventos', async (req, res) => {
 router.get('/usuarios', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM Usuarios');
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los eventos' });
+  }
+});
+
+// Obtener todos los eventos (solo para pruebas, se eliminara)
+router.get('/allevents', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM Eventos');
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los eventos' });
+  }
+});
+
+// Obtener todos los eventos (solo para pruebas, se eliminara)
+router.get('/allpart', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM Participantes');
     res.json(rows);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los eventos' });
@@ -86,15 +116,22 @@ router.post('/login', async (req, res) => {
 });
 
 // Crear un nuevo evento
-router.post('/eventos', async (req, res) => {
-  const { titulo, descripcion, fecha, hora, ubicacion, tipo_evento, organizador_id } = req.body;
+router.post('/eventos', authenticateToken, async (req, res) => {
+  const { titulo, descripcion, fecha, hora, ubicacion, tipo_evento } = req.body;
+  if (!titulo || !fecha || !hora) {
+    return res.status(400).json({ error: "Faltan datos obligatorios" });
+  }
+  const organizador_id = req.usuarioId; // Obtén el ID del usuario autenticado del token
+
   try {
     const [result] = await pool.query(
       'INSERT INTO Eventos (titulo, descripcion, fecha, hora, ubicacion, tipo_evento, organizador_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [titulo, descripcion, fecha, hora, ubicacion, tipo_evento, organizador_id]
     );
+
     res.status(201).json({ id: result.insertId, titulo });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Error al crear el evento' });
   }
 });

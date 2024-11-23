@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS Notificaciones (
 
 INSERT INTO Usuarios (nombre, email, contrasena)
 VALUES 
-('Juan Pérez', 'juan@example.com', '$2a$10$wWOd7Y6AH1V.xupYyYlhKOyDY3T.RF3KGBopZC0JQmcQ.I79kOdZ.'),
-('Ana García', 'ana@example.com', '$2a$10$wWOd7Y6AH1V.xupYyYlhKOyDY3T.RF3KGBopZC0JQmcQ.I79kOdZ.'),
-('Carlos Ruiz', 'carlos@example.com', '$2a$10$wWOd7Y6AH1V.xupYyYlhKOyDY3T.RF3KGBopZC0JQmcQ.I79kOdZ.');
+('Juan Pérez', 'juan@example.com', 'password123'),
+('Ana García', 'ana@example.com', 'password456'),
+('Carlos Ruiz', 'carlos@example.com', 'password789');
 
 INSERT INTO Eventos (titulo, descripcion, fecha, hora, ubicacion, tipo_evento, organizador_id)
 VALUES

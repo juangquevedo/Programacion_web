@@ -82,6 +82,9 @@ document.getElementById("btn-register").addEventListener("click", async () => {
         if (response.ok) {
             const data = await response.json();
             alert(`Evento creado con éxito. ID: ${data.id}`);
+
+            invitar(data.id);
+
             window.location.href = "eventos.html"; // Redirige a la lista de eventos
         } else {
             const error = await response.json();
@@ -92,3 +95,34 @@ document.getElementById("btn-register").addEventListener("click", async () => {
         alert("Error del servidor. Intenta nuevamente.");
     }
 });
+
+function invitar(evento_id) {
+    var invitados = document.getElementById("invitados").value.trim();
+    invitados = invitados.split(',');
+    
+    invitados.forEach(async invitado => {
+        try {
+            const response = await fetch("http://localhost:3000/participantes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: invitado, 
+                    evento_id:  evento_id    
+                }),
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                alert(`Se invito con exito a: ${invitado}`);
+            } else {
+                const error = await response.json();
+                alert(`Error al invitar a: ${invitado}`);
+            }
+        } catch (error) {
+            console.error("Error al enviar datos al backend:", error);
+            alert("Error del servidor. Intenta nuevamente.");
+        }
+    });
+}

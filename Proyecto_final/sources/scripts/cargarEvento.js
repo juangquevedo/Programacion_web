@@ -3,7 +3,7 @@ const token = sessionStorage.getItem("token");
 
 if (!token) {
     alert("Por favor, inicia sesión para ver tus eventos.");
-    // window.location.href = "login.html"; // Redirige al inicio de sesión
+    window.location.href = "login.html"; // Redirige al inicio de sesión
 }
 
 const cargarEventos = async () => {

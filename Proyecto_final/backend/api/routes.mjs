@@ -136,7 +136,14 @@ router.post('/eventos', authenticateToken, async (req, res) => {
 
 // Participar en un evento
 router.post('/participantes', async (req, res) => {
-  const { usuario_id, evento_id } = req.body;
+  const { email, evento_id } = req.body;
+
+  const usuario_id = await pool.query('SELECT usuario_id FROM Usuarios WHERE email = ?', [email]);
+
+  if (usuario_id.length === 0) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+  }
+
   try {
     const [result] = await pool.query(
       'INSERT INTO Participantes (usuario_id, evento_id) VALUES (?, ?)',

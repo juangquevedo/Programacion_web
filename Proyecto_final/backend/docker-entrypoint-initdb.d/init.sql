@@ -52,8 +52,8 @@ VALUES
 
 INSERT INTO Eventos (titulo, descripcion, fecha, hora, ubicacion, tipo_evento, organizador_id)
 VALUES
-('Fiesta de cumpleaños', 'Celebración en el jardín', '2024-12-01', '18:00:00', 'Parque Central', 'privado', 1),
-('Conferencia Tech', 'Últimas tendencias en tecnología', '2024-12-10', '10:00:00', 'Auditorio Principal', 'publico', 2);
+('Fiesta de cumpleaños', 'Celebración en el jardín', '2024-12-01', '18:00:00', 'SALON DE EVENTOS DINASTIA ENCANTO REAL, Carrera 39, Medellín, Antioquia, Colombia', 'privado', 1),
+('Conferencia Tech', 'Últimas tendencias en tecnología', '2024-12-10', '10:00:00', 'Universidad de Antioquia - UdeA, Calle 67, Aranjuez, Medellín, Antioquia, Colombia', 'publico', 2);
 
 INSERT INTO Participantes (usuario_id, evento_id, confirmado)
 VALUES

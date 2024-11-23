@@ -16,3 +16,5 @@ Los eventos incluyen una ubicación que se muestra mediante una API de mapas (co
 
 Notificaciones y Recordatorios:
 Integración con una API de notificaciones para enviar recordatorios a los participantes antes del evento.
+
+Todas las contraseñas de los usuarios creados al iniciar la base de datos es "password123"

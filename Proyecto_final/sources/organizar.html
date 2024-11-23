@@ -27,23 +27,31 @@
     <main class="text-center py-12 px-6 md:px-20 lg:px-32">
         <h1 class="text-4xl mb-2">ORGANIZAR EVENTO</h1>
         <p class="text-xl mb-10">Escribe la información de tu evento e invita a tus amigos</p>
-        <div class="form-container flex flex-col md:flex-row justify-center items-start gap-10">
-            <form class="event-form w-full max-w-md space-y-5">
-                <input type="text" placeholder="Escribe nombre del evento" class="w-full p-4 text-black rounded-lg" required>
-                <input type="text" placeholder="Escribe el nombre del encargado" class="w-full p-4 text-black rounded-lg" required>
-                <input type="text" placeholder="Escribe un contacto" class="w-full p-4 text-black rounded-lg" required>
-                <textarea placeholder="Escribe la descripción" class="w-full p-4 text-black rounded-lg h-28 resize-none" required></textarea>
+        <div class="flex flex-col md:flex-row justify-between gap-8">
+            <form id="event-form" class="w-1/2 md:w-1/2 space-y-4">
+                <input id="titulo" name="titulo" type="text" placeholder="Escribe el título del evento" class="w-full p-4 mb-2 text-black rounded-lg" required>
+                <textarea id="descripcion" name="descripcion" placeholder="Escribe la descripción" class="w-full p-4 mb-2 text-black rounded-lg h-28 resize-none" required></textarea>
+                <input id="fecha" name="fecha" type="date" class="w-full p-4 mb-2 text-black rounded-lg" required>
+                <input id="hora" name="hora" type="time" class="w-full p-4 mb-2 text-black rounded-lg" required>
+                <select id="tipo-evento" name="tipo_evento" class="w-full p-4 mb-2 text-black rounded-lg" required>
+                    <option value="">Selecciona el tipo de evento</option>
+                    <option value="publico">publico</option>
+                    <option value="privado">privado</option>
+                </select>
             </form>
-            <div class="map-container max-w-md">
-                <h2 class="text-2xl mb-4">Ingresa la ubicación</h2>
-                <input id="location-input" type="text" placeholder="Escribe una ubicación" class="w-full p-4 text-black rounded-lg">
-                <div id="map" class="w-96 h-72 rounded-lg mt-4"></div>  
+
+            <div class="map-container w-96 md:w-1/2">
+                <h2 class="text-2xl mb-4">Ubicación</h2>
+                <input id="location-input" name="ubicacion" type="text" placeholder="Escribe una ubicación" class="w-full p-4 text-black rounded-lg">
+                <div id="map" class="w-full h-72 rounded-lg mt-4 mb-4"></div>
             </div>
         </div>
-        <button class="mt-10 px-6 py-3 bg-white text-black rounded-full font-bold border border-[#F99E45]">Registrar</button>
+        <button type="button" id="btn-register" class="w-1/2 px-6 py-3 bg-[#F99E45] text-black rounded-full font-bold">
+            Registrar Evento
+        </button>
     </main>
+    
     <script src="scripts/mapsapi.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbIi1nr5zsmcCBkm1vHQ259HWy-kwkoM&callback=initMap" async defer></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbIi1nr5zsmcCBkm1vHQ259HWy-kwkoM&loading=async&libraries=places&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbIi1nr5zsmcCBkm1vHQ259HWy-kwkoM&libraries=places&callback=initMap" async defer></script>
 </body>
 </html>

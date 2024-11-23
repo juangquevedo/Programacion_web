@@ -3,26 +3,22 @@ let marker;
 let autocomplete;
 
 function initMap() {
-    // Inicializa el mapa centrado en una ubicación predeterminada
-    const defaultLocation = { lat: 6.2693, lng: -75.5687 }; // ubicacion de la UdeA 
+    const defaultLocation = { lat: 6.2693, lng: -75.5687 }; // UdeA
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
         center: defaultLocation,
     });
 
-    // Coloca un marcador en la ubicación predeterminada
     marker = new google.maps.Marker({
         position: defaultLocation,
         map: map,
         draggable: true,
     });
 
-    // Configura el autocompletado en el campo de entrada de ubicación
     const input = document.getElementById("location-input");
     autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.bindTo("bounds", map);
 
-    // Listener para cuando se selecciona una ubicación
     autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.geometry || !place.geometry.location) {
@@ -30,18 +26,69 @@ function initMap() {
             return;
         }
 
-        // Centra el mapa en la ubicación seleccionada
         map.setCenter(place.geometry.location);
         map.setZoom(15);
-
-        // Coloca o mueve el marcador a la nueva ubicación
         marker.setPosition(place.geometry.location);
     });
 
-    // Listener para mover el marcador cuando es arrastrado
-    marker.addListener('dragend', function(event) {
+    marker.addListener("dragend", function (event) {
         const lat = event.latLng.lat();
         const lng = event.latLng.lng();
         console.log("Nueva ubicación: ", lat, lng);
     });
 }
+
+function getMarkerPosition() {
+    const position = marker.getPosition();
+    return { lat: position.lat(), lng: position.lng() };
+}
+
+// Registrar evento
+document.getElementById("btn-register").addEventListener("click", async () => {
+    const titulo = document.getElementById("titulo").value.trim();
+    const descripcion = document.getElementById("descripcion").value.trim();
+    const fecha = document.getElementById("fecha").value.trim();
+    const hora = document.getElementById("hora").value.trim();
+    const tipo_evento = document.getElementById("tipo-evento").value.trim();
+    const ubicacion = document.getElementById("location-input").value.trim();
+    const coordenadas = getMarkerPosition();
+
+    if (!titulo || !fecha || !hora || !tipo_evento || !ubicacion) {
+        alert("Por favor, completa todos los campos obligatorios.");
+        return;
+    }
+
+    const eventoData = {
+        titulo: titulo,
+        descripcion: descripcion,
+        fecha: fecha,
+        hora: hora,
+        ubicacion: ubicacion,
+        tipo_evento: tipo_evento,
+    };
+
+    console.log("Datos del evento:", eventoData);
+
+    try {
+        const response = await fetch("http://localhost:3000/eventos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Usa el token JWT si es necesario
+            },
+            body: JSON.stringify(eventoData),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            alert(`Evento creado con éxito. ID: ${data.id}`);
+            window.location.href = "eventos.html"; // Redirige a la lista de eventos
+        } else {
+            const error = await response.json();
+            alert(`Error al crear el evento: ${error.error}`);
+        }
+    } catch (error) {
+        console.error("Error al enviar datos al backend:", error);
+        alert("Error del servidor. Intenta nuevamente.");
+    }
+});

@@ -27,15 +27,15 @@
     <main>
         <h2 class="text-2xl font-semibold text-white text-center">Crear una cuenta</h2>
 
-        <form class="bg-[#0EB1D0] rounded-lg w-full">
+        <form id="registroForm" class="bg-[#0EB1D0] rounded-lg w-full">
             <div>
               <div>
-                <label for="name" class="block tracking-wide text-gray-700 text-xs font-bold mb-2">Nombre</label>
-                <input id="name" type="text" placeholder="Tu nombre" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white">
+                <label for="nombre" class="block tracking-wide text-gray-700 text-xs font-bold mb-2">Nombre</label>
+                <input id="nombre" type="text" placeholder="Tu nombre" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white">
               </div>
               <div>
-                <label for="grid-last-name" class="block tracking-wide text-gray-700 text-xs font-bold">Apellido</label>
-                <input  id="grid-last-name" type="text" placeholder="Tu Apellido" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                <label for="apellido" class="block tracking-wide text-gray-700 text-xs font-bold">Apellido</label>
+                <input  id="apellido" type="text" placeholder="Tu Apellido" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
               </div>
             </div>
             <div>
@@ -47,12 +47,15 @@
                 <input  id="password" type="password" placeholder="******************" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
             </div>
             <div>
-                <button class="bg-[#F99E45] text-white font-bold py-2 px-4 mb-4 rounded-full" type="button">Registrarse</button>
+                <button id="btnRegistrar" class="bg-[#F99E45] text-white font-bold py-2 px-4 mb-4 rounded-full" type="button">Registrarse</button>
             </div>
         </form>
         <p class="mt-4 text-center text-white">
             ¿Ya tienes una cuenta? <a href="login.html" class="text-[#0EB1D0] hover:underline">Ingresa aquí</a>
         </p>
     </main>
+
+    <script src="scripts/registro.js"></script>
+
 </body>
 </html>

@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
             alert("Inicio de sesión exitoso");
             console.log("Usuario autenticado:", data);
+            sessionStorage.setItem('user_id', data.id);
             sessionStorage.setItem('token', data.token);
 
             // Redirigir a otra página después del inicio de sesión exitoso

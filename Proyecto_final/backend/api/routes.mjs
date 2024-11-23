@@ -10,15 +10,13 @@ const router = Router();
 router.get('/eventos', authenticateToken, async (req, res) => {
   const userId = req.user.id; // Obtenemos el ID del usuario desde el token
   try {
-    const [rows] = await pool.query(
-      `
-      SELECT e.evento_id, e.titulo, e.descripcion, e.fecha, e.hora, e.ubicacion
-      FROM Participantes p
-      INNER JOIN Eventos e ON p.evento_id = e.evento_id
-      WHERE p.usuario_id = ?
-      `,
-      [userId]
-    );
+    const [rows] = await pool.query(`
+      SELECT * 
+      FROM Eventos
+      WHERE evento_id IN (
+        SELECT evento_id FROM Participantes WHERE usuario_id = ?
+      ) OR organizador_id = ?
+    `, [userId, userId]);
     res.json(rows);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los eventos' });
@@ -108,7 +106,7 @@ router.post('/login', async (req, res) => {
           { expiresIn: '1h' }
       );
 
-      return res.json({ message: 'Login exitoso', token });
+      return res.json({ message: 'Login exitoso', id: usuario.usuario_id, token });
   } catch (error) {
       console.error('Error en el login:', error);
       return res.status(500).json({ error: 'Error del servidor' });
@@ -121,7 +119,7 @@ router.post('/eventos', authenticateToken, async (req, res) => {
   if (!titulo || !fecha || !hora) {
     return res.status(400).json({ error: "Faltan datos obligatorios" });
   }
-  const organizador_id = req.usuarioId; // Obtén el ID del usuario autenticado del token
+  const organizador_id = req.user.id; // Obtén el ID del usuario autenticado del token
 
   try {
     const [result] = await pool.query(
